@@ -1,156 +1,172 @@
-//Завдання 1.Cтворіть об'єкт person за допомогою конструктора з полями name: "John",age: 25
-let person = {};
-
-console.log("Завдання 1 ====================================");
-
-console.log("person", person); // Виведе {name: "John", age: 25}
-
-//Завдання 2. Cтворіть об'єкт personLarge який буде мати такі ж поля як person ,
-// та вкладений об'єкт address з полями  street: "123 Main St", city: "New York", country: "USA",
-let personLarge = {
-  //використовуємо деструктурізацію на об'єкті person
-  //створюємо об'єкт address
+// Task 1: Create an object `person` using an object literal with fields `name: "John"`, `age: 25`
+let person = {
+  name: "John",
+  age: 25
 };
 
-console.log("Завдання 2 ====================================");
-console.log("personLarge", personLarge); // Виведе
+console.log("Task 1 ====================================");
+
+console.log("person", person); // Will output {name: "John", age: 25}
+
+// Task 2: Create an object `personLarge` which has the same fields as `person`, 
+// and a nested object `address` with fields `street: "123 Main St"`, `city: "New York"`, `country: "USA"`.
+let personLarge = {
+  ...person,
+  address: {
+    street: "123 Main St", 
+    city: "New York", 
+    country: "USA"
+  }
+};
+
+console.log("Task 2 ====================================");
+console.log("personLarge", personLarge); // Will output
 // personLarge {
 //   name: 'John',
 //   age: 25,
 //   address: { street: '123 Main St', city: 'New York', country: 'USA' }
 // }
 
-//Завдання 3: Створіть функцію, що повертає новий об'єкт з тими ж властивостями, що й переданий у якості аргумента об'єкт.
+// Task 3: Create a function that returns a new object with the same properties as the object passed as an argument.
 
 var animal = {
   type: "Dog",
   breed: "Labrador Retriever",
 };
 
-// Функція для створення нового об'єкта з тими ж властивостями
+// Function to create a new object with the same properties
 function copyObject(obj) {
-  // Використовуємо синтаксис деструктурізації {...person} для створення нового об'єкта з тими ж властивостями
-  // Повертаємо новий об'єкт
+  let newObject = { ...obj };
+  return newObject;
 }
 
-console.log("Завдання 3 ====================================");
+console.log("Task 3 ====================================");
 
-console.log("copyObject(animal)", copyObject(animal)); // Виведе { type: 'Dog', breed: 'Labrador Retriever' }
+console.log("copyObject(animal)", copyObject(animal)); // Will output { type: 'Dog', breed: 'Labrador Retriever' }
 
-////Завдання 4. Перевірте наявність властивості в об'єкті за допомогою оператора in.
+// Task 4: Check for the presence of a property in an object using the `in` operator.
 let fruit = {
   name: "Banana",
   color: "Yellow",
 };
-// Функція для перевірки наявності властивості в об'єкті
+
+// Function to check the presence of a property in an object
 function hasProperty(obj, property) {
-  // Використовуємо оператор "in" для перевірки наявності властивості
-  // Запишимо умову якщо властивість існує повертає текст Property ${property} exists,
-  // інашке повертаємо Property ${property} does not exist.
+  if (property in obj) {
+    return `Property "${property}" exists.`;
+  } else {
+    return `Property "${property}" does not exist.`;
+  }
 }
 
-console.log("Завдання 4 ====================================");
-console.log(hasProperty(fruit, "name")); // Виведе "Property name exists."
-console.log(hasProperty(fruit, "taste")); // Виведе "Property taste does not exist."
+console.log("Task 4 ====================================");
+console.log(hasProperty(fruit, "name")); // Will output "Property name exists."
+console.log(hasProperty(fruit, "taste")); // Will output "Property taste does not exist."
 
-// Завдання 5: Створіть функцію, що отримує об'єкт і виводить на консоль всі його ключі та значення.
+// Task 5: Create a function that takes an object and logs all its keys and values.
 let country = {
   name: "United States",
   capital: "Washington, D.C.",
 };
-// Функція для виведення всіх ключів і значень об'єкта
+
+// Function to log all keys and values of an object
 function printKeysAndValues(obj) {
-  // Проходимося по всіх ключах об'єкту за допомогою циклу "for in"
-  // Виводимо ключ та значення на консоль
+  for (let key in obj){
+    console.log(`Key: ${key}, Value: ${obj[key]}`)
+  }
 }
 
-console.log("Завдання 5 ====================================");
+console.log("Task 5 ====================================");
 printKeysAndValues(country);
-// Виведе
+// Will output
 // Key: name, Value: United States
 // Key: capital, Value: Washington, D.C.
 
-// Завдання 6: Видаліть властивість з об'єкта за допомогою оператора delete.
+// Task 6: Remove a property from an object using the `delete` operator.
 let movie = {
   title: "Inception",
   director: "Christopher Nolan",
 };
-// Функція для видалення властивості з об'єкта
+
+// Function to remove a property from an object
 function deleteProperty(obj, property) {
-  // Використовуємо оператор "delete" для видалення властивості
-  // Повертаємо об'єкт
+  delete obj[property];
+  return obj;
 }
 
-console.log("Завдання 6 ====================================");
-console.log(deleteProperty(movie, "director")); // Виведе { title: 'Inception' }
+console.log("Task 6 ====================================");
+console.log(deleteProperty(movie, "director")); // Will output { title: 'Inception' }
 
-//Завдання 7: Використайте ключове слово this в об'єкті.
-// Створюємо об'єкт
+// Task 7: Use the `this` keyword in an object.
+// Create an object
 let user = {
   name: "John",
   age: 25,
-  // Створюємо метод introduce, який за допомогою ключового слова this має повернути такий рядок
-  // My name is John and I am 25 years old.
+
+  introduce: function(){
+    return `My name is ${this.name} and I am ${this.age} years old.`;
+  }
 };
 
-console.log("Завдання 7 ====================================");
-// Викликаємо метод introduce об'єкта user
-// Розкоментуйте рядок нижче після виконня завдання для перевірки
-// console.log(user.introduce());
-// Виведе My name is John and I am 25 years old.
+console.log("Task 7 ====================================");
+console.log(user.introduce()); // Will output My name is John and I am 25 years old.
 
-// Завдання 8: Створіть функцію, яка додає нове поле до об'єкту.
+// Task 8: Create a function that adds a new field to an object.
 let book = {
   title: "To Kill a Mockingbird",
   author: "Harper Lee",
 };
 
-// Функція для додавання нового поля до об'єкту
+// Function to add a new field to an object
 function addField(obj, newField, value) {
-  // Додаємо нове поле до об'єкту з допомогою квадратних дужок
-  // Повертаємо об'єкт
+  obj[newField] = value;
+  return obj;
 }
 
-console.log("Завдання 8 ====================================");
-console.log(addField(book, "year", 1960)); // Виведе { title: 'To Kill a Mockingbird', author: 'Harper Lee', year: 1960 }
+console.log("Task 8 ====================================");
+console.log(addField(book, "year", 1960)); // Will output { title: 'To Kill a Mockingbird', author: 'Harper Lee', year: 1960 }
 
-// Завдання 9: Деструктуруйте об'єкт в нові змінні.
+// Task 9: Destructure an object into new variables.
 let laptop = {
   brand: "Dell",
   model: "XPS 13",
 };
-// Функція для деструктуризації об'єкту
+
+// Function for destructuring an object
 function destructureObject(obj) {
-  // Використовуємо деструктуризацію для створення нових змінних з властивостей об'єкту і отримуємо з нього змінні brand та model
-  // Повертаємо нові змінні  в форматі 'Brand: ${brand}, Model: ${model}'
+  const { brand, model } = obj;
+  return `Brand: ${brand}, Model: ${model}`;
 }
 
-console.log("Завдання 9 ====================================");
-console.log(destructureObject(laptop)); // Виведе Brand: Dell, Model: XPS 13
+console.log("Task 9 ====================================");
+console.log(destructureObject(laptop)); // Will output Brand: Dell, Model: XPS 13
 
-// Завдання 10: Змініть значення полів об'єкту, що знаходяться в масиві об'єктів.
+// Task 10: Change the value of fields in an object within an array of objects.
 
-// Створюємо масив об'єктів userList, першим елементом якого буде об'єкт name:"Jack",role:"reader", а другим об'єкт name: "Jane", role: 'admin'
+// Create an array of objects `userList`, with the first element being an object with `name:"Jack"`, `role:"reader"`, 
+// and the second object with `name: "Jane"`, `role: 'admin'`
 
 let userList = [
   { name: "Jack", role: "reader" },
   { name: "Jane", role: "admin" },
 ];
-// Функція для зміни ролі всіх осіб у масиві
+
+// Function to change the role of all users in the array
 function changeRole(array, newRole) {
-  // Ітеруємося по масиву об'єктів за допомогою циклу "for of"
-  // Змінюємо роль кожного користувача на нове ім'я
-  // Виводимо об'єкт на консоль
+  for (let user of array){
+    user.role = newRole;
+  }
+  console.log(array);
 }
 
-console.log("Завдання 10 ====================================");
+console.log("Task 10 ====================================");
 changeRole(userList, "editor");
-// Виведе
+// Will output
 // { name: 'Jack', role: 'editor' }
 // { name: 'Jane', role: 'editor' }
 
-// Завдання 11: Використовуйте вкладені об'єкти для зберігання більш складної інформації.
-// Створюємо об'єкт з вкладеним об'єктом
+// Task 11: Use nested objects to store more complex information.
+// Create an object with a nested object
 let product = {
   productName: "Smartphone",
   price: 699,
@@ -159,61 +175,62 @@ let product = {
     country: "USA",
   },
 };
-// Функція для виводу деталей людини
+
+// Function to print product details
 function printProductDetails(obj) {
-  // Використовуємо деструктуризацію для отримання значень productName, price i також значень companyName, country вкладеного об'єкту manufacturer
-  // Виводимо productName, price, companyName та country на консоль
+  const { productName, price, manufacturer: { companyName, country } } = obj;
+  console.log(productName, price, companyName, country);
 }
 
-console.log("Завдання 11 ====================================");
-printProductDetails(product); // Виведе Smartphone 699 Tech Corp USA
+console.log("Task 11 ====================================");
+printProductDetails(product); // Will output Smartphone 699 Tech Corp USA
 
-// Завдання 12: Показати, що об'єкти будуть дорівнювати один одному лише тоді, коли одному об'єкту присвоїти значення іншого.
-// Створіть об'єкт два об'єкти planet1 та planet2 з полями   name: "Земля",radius: 6371,
+// Task 12: Show that objects will only be considered equal if one object is assigned the value of another.
+// Create two objects `planet1` and `planet2` with fields `name: "Earth"`, `radius: 6371`
 
-let planet1 = { name: "Земля", radius: 6371 };
-let planet2 = { name: "Земля", radius: 6371 };
+let planet1 = { name: "Earth", radius: 6371 };
+let planet2 = { name: "Earth", radius: 6371 };
 
-// Функція для перевірки рівності об'єктів
 function compareObjects(obj1, obj2) {
-  // Виводимо результат порівняння об'єктів
-  // Присвоємо obj2 значення об'єкту obj1
-  // Виводимо результат порівняння об'єктів
+  console.log(obj1 === obj2);
+  obj2 = obj1;
+  console.log(obj1 === obj2);
 }
 
-console.log("Завдання 12 ====================================");
-compareObjects(planet1, planet2); // Виведе
-//false
-//true
+console.log("Task 12 ====================================");
+compareObjects(planet1, planet2); // Will output
+// false
+// true
 
-// Завдання 13: Використовуйте деструктуризацію зі значенням за замовчуванням у аргументах функції для об'єкта.
+// Task 13: Use destructuring with default values in function arguments for an object.
 let car = {
   brand: "BMW",
   year: 2022,
 };
-// Створюємо функцію, яка приймає об'єкт як аргумент і використовує деструктуризацію зі значенням за замовчуванням
-// brand за замовчуванням призначемо Unknown, year за замовчуванням призначемо 0, country за замовчуванням призначемо Unknown
+
+// Create a function that takes an object as an argument and uses destructuring with default values
+// Default values: brand = "Unknown", year = 0, country = "Unknown"
 
 function showCarInfo({
   brand = "Unknown",
   year = 0,
   country = "Unknown",
 } = {}) {
-  // Повертаємо об'єкт зі значеннями властивостей
+  return {brand, year, country};
+  // Return an object with property values
 }
 
-console.log("Завдання 13 ====================================");
-console.log(showCarInfo(car)); // Виведе { brand: 'BMW', year: 2022, country: 'Unknown' }
+console.log("Task 13 ====================================");
+console.log(showCarInfo(car)); // Will output { brand: 'BMW', year: 2022, country: 'Unknown' }
 
-// Завдання 14: Додайте нову властивість до вбудованого об'єкту Array через літерал.
-// Створюємо функцію, яка буде додавати нову властивість до масиву
+// Task 14: Add a new property to the built-in Array object using a literal.
+// Create a function that adds a new property to an array
+
 function addProperty(array) {
-  // Додаємо нову властивість customProperty до прототипу Array зі значенням myProperty
-  // Повертаємо переданий масив з новою властивістю
+  Array.prototype.customProperty = "myProperty";
+  return array;
 }
 
-console.log("Завдання 14 ====================================");
-// Створимо масив newArr з новою властивістю за допомогої нашої функції в яку передамо [1, 2, 3, 4, 5]
-
-// Розкоментуйте рядок нижче після виконня завдання для перевірки
-// console.log(newArr.customProperty); // Виведе myProperty
+console.log("Task 14 ====================================");
+let newArr = addProperty([1, 2, 3, 4, 5]);
+console.log(newArr.customProperty); // Will output myProperty
